@@ -8,15 +8,48 @@
 #@file: Plugins.Buttonplugin
 #@description:
 
+from PyQt5.QtCore import Q_ENUMS, pyqtProperty
 from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin
 from PyQt5.QtGui import QPixmap, QIcon
 
-from Widgets.Button import Button
+from Core.Colors import allColors
+from Widgets.Button import Button as _Button
 
 
 __Author__ = 'By: Irony\nQQ: 892768447\nEmail: 892768447@qq.com'
 __Copyright__ = 'Copyright (c) 2018 Irony'
 __Version__ = 1.0
+
+
+class Button(_Button):
+    """设计师里需要枚举,必须在QObject的对象里定义,所以这里重新继承下"""
+
+    class EnumColors:
+        White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
+            Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
+            DarkGray = range(13)
+    Q_ENUMS(EnumColors)
+
+    def __init__(self, *args, **kwargs):
+        super(Button, self).__init__(*args, **kwargs)
+        self._colorList = allColors()
+        self._colorTheme = self.EnumColors.White
+
+    def resetColorTheme(self):
+        """* 重置主题列表"""
+        self._colorTheme = self.EnumColors.White
+        self.Color = self._colorList[0]()
+        self.update()
+
+    @pyqtProperty(EnumColors, freset=resetColorTheme)
+    def colorTheme(self):
+        return self._colorTheme
+
+    @colorTheme.setter
+    def colorTheme(self, theme):
+        self._colorTheme = theme
+        self.Color = self._colorList[theme]()
+        self.update()
 
 
 class ButtonPlugin(QPyDesignerCustomWidgetPlugin):

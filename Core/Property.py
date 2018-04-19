@@ -3,7 +3,7 @@
 from PyQt5.QtCore import pyqtSignal, pyqtProperty
 from PyQt5.QtGui import QColor
 
-from Core.Colors import getColor, White, _Color, allColors, EnumColors
+from Core.Colors import getColor, White, _Color
 
 
 # Created on 2018年4月16日
@@ -21,7 +21,9 @@ __Version__ = 1.0
 
 class Property:
 
-    colorListChanged = pyqtSignal(QColor, QColor)  # 主题颜色列表改变信号
+    White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
+        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
+        DarkGray = range(13)
 
     backgroundColorChanged = pyqtSignal(QColor, QColor)  # 背景颜色改变信号
     backgroundColorHoverChanged = pyqtSignal(QColor, QColor)  # 悬停背景颜色改变信号
@@ -36,8 +38,6 @@ class Property:
         super(Property, self).__init__(*args, **kwargs)
         self.Color = White()
         self._Color = White()  # 还原色
-        self._ColorList = allColors()
-        self.ColorIndex = 0
         self._borderWidth = 0  # 默认边框宽度
         self._borderRadius = 4  # 默认圆角半径
 
@@ -55,25 +55,6 @@ class Property:
 
     def getColor(self):
         return self.Color
-
-##########################################################################
-
-    def resetColorIndex(self):
-        """* 重置主题列表索引"""
-        self.ColorIndex = 0
-        self.Color = self._ColorList[0]()
-        self.update()
-
-    @pyqtProperty(int, freset=resetColorIndex)
-    def colorIndex(self) -> int:
-        """* 获取主题列表索引"""
-        return self.ColorIndex
-
-    @colorIndex.setter
-    def colorIndex(self, index):
-        self.ColorIndex = index if (0 <= index < len(EnumColors)) else 0
-        self.Color = self._ColorList[self.ColorIndex]()
-        self.update()
 
 ##########################################################################
 
