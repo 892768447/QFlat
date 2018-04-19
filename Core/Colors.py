@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from enum import IntEnum
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 
@@ -165,6 +167,18 @@ def getColor(color: [str, int, tuple, list]) -> QColor:
         return White()
 
 
-def alls():
-    return (BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet,
-            Grapefruit, Lavender, PinkRose, LightGray, MediumGray, DarkGray, White)
+def allColors():
+    """第一个为默认颜色"""
+    return [
+        White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet,
+        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, DarkGray
+    ]
+
+
+class EnumColors(IntEnum):
+    White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
+        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
+        DarkGray = range(13)
+    
+print(EnumColors)
+print(len(EnumColors))

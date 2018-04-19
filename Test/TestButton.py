@@ -30,7 +30,7 @@ class Window(QWidget):
         self.setAttribute(Qt.WA_StyledBackground, True)
         self.setStyleSheet('Window{background:rgb(241,242,246);}')
         layout = QVBoxLayout(self)
-        for color in Colors.alls():
+        for color in Colors.allColors():
             color = color()
             btn = Button(color.name(), self)
             btn.Color = color
