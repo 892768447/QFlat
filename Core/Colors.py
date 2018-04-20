@@ -43,93 +43,110 @@ class _Color(QColor):
         except:
             return QColor()
 
+    @classmethod
     def backgroundColors(self):
         return (Qt.white, Qt.white)
 
+    @classmethod
     def textColors(self):
         return (Qt.white, Qt.white)
 
 
 class BlueJeans(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#4A89DC', '#5D9CEC')
 
 
 class Aqua(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#3BAFDA', '#4FC1E9')
 
 
 class Mint(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#37BC9B', '#48CFAD')
 
 
 class Grass(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#8CC152', '#A0D468')
 
 
 class Sunflower(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#F6BB42', '#FFCE54')
 
 
 class Bittersweet(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#E9573F', '#FC6E51')
 
 
 class Grapefruit(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#DA4453', '#ED5565')
 
 
 class Lavender(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#967ADC', '#AC92EC')
 
 
 class PinkRose(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#D770AD', '#EC87C0')
 
 
 class LightGray(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#E6E9ED', '#F5F7FA')
 
+    @classmethod
     def textColors(self):
         return (Qt.black, Qt.black)
 
 
 class MediumGray(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#AAB2BD', '#CCD1D9')
 
 
 class DarkGray(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ('#434A54', '#656D78')
 
 
 class White(_Color):
 
+    @classmethod
     def backgroundColors(self):
         return ("#FFFFFF", "#CCD1D9")
 
+    @classmethod
     def textColors(self):
         return (Qt.black, Qt.black)
 

@@ -3,5 +3,6 @@ encoding//Core/Colors.py=utf-8
 encoding//Core/Property.py=utf-8
 encoding//Plugins/Buttonplugin.py=utf-8
 encoding//Test/TestButton.py=utf-8
+encoding//Test/TestColors.py=utf-8
 encoding//Widgets/Button.py=utf-8
 encoding/designer.py=utf-8
