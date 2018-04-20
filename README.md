@@ -21,4 +21,4 @@ Simple Flat Design By PyQt5, Like: http://bootflat.github.io/documentation.html
 
 ## [Donate 打赏](https://github.com/892768447/PyQt/tree/master/Donate)
 
-## Documentation
+## [Wiki](../wiki)
