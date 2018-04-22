@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QScrollArea,\
 
 from Core import Colors
 from Widgets.Button import Button
-sys.path.append('../')
 
 
 # Created on 2018年4月16日
