@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import sys
-sys.path.append('../')
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QApplication, QScrollArea,\
+    QMenu
 
 from Core import Colors
 from Widgets.Button import Button
+sys.path.append('../')
 
 
 # Created on 2018年4月16日
@@ -43,7 +44,14 @@ class Window(QWidget):
         b = Button('Test', self)
         b.textColor = 'red'
         layout.addWidget(b)
-        layout.addWidget(Button('Test', self))
+
+        # menu button
+        mbtn = Button('Menu Button', self)
+        menu = QMenu(mbtn)
+        for i in range(5):
+            menu.addAction('menu %s' % i)
+        mbtn.setMenu(menu)
+        layout.addWidget(mbtn)
 
 
 if __name__ == "__main__":
