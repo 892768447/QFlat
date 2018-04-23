@@ -61,4 +61,3 @@ class Button(QPushButton, Property):
         painter.setFont(font)
         painter.setPen(self.textColorHover if hover else self.textColor)
         painter.drawText(self.rect(), Qt.AlignCenter, self.text())
-        event.accept()
