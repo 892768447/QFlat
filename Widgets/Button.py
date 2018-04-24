@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QPainterPath, QPen, QFont
+from PyQt5.QtGui import QPainter, QPainterPath, QPen, QFont, QHelpEvent
 from PyQt5.QtWidgets import QPushButton, QStyleOptionButton, QStyle
 
 from Core.Property import Property
+from Widgets.ToolTip import ToolTip
 
 
 # Created on 2018年4月16日
@@ -25,6 +26,24 @@ class Button(QPushButton, Property):
     def __init__(self, *args, **kwargs):
         super(Button, self).__init__(*args, **kwargs)
         self.setMinimumHeight(34)
+
+    def event(self, event):
+        if isinstance(event, QHelpEvent):
+            return False
+        return super(Button, self).event(event)
+
+    def enterEvent(self, event):
+        """鼠标进入事件"""
+        super(Button, self).enterEvent(event)
+        if not self.toolTip():
+            return
+        ToolTip.showText(self, self.toolTip())
+
+    def leaveEvent(self, event):
+        """鼠标离开事件"""
+        super(Button, self).leaveEvent(event)
+        if not self.toolTip():
+            return
 
     def paintEvent(self, event):
         """重绘界面"""

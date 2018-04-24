@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import cgitb
 import sys
 
 from PyQt5.QtCore import Qt
@@ -33,6 +34,7 @@ class Window(QWidget):
         for color in Colors.allColors():
             color = color()
             btn = Button(color.name(), self)
+            btn.setToolTip(color.name())
             btn.Color = color
             layout.addWidget(btn)
 
@@ -54,6 +56,7 @@ class Window(QWidget):
 
 
 if __name__ == "__main__":
+    sys.excepthook = cgitb.Hook(0, file=sys.stderr, format='text')
     app = QApplication(sys.argv)
     window = QScrollArea()
     window.setWidgetResizable(True)
