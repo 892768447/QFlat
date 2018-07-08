@@ -6,6 +6,7 @@ encoding//Test/TestButton.py=utf-8
 encoding//Test/TestButtonGroup.py=utf-8
 encoding//Test/TestColors.py=utf-8
 encoding//Test/TestLabel.py=utf-8
+encoding//Test/TestTooltip.py=utf-8
 encoding//Widgets/Button.py=utf-8
 encoding//Widgets/ButtonGroup.py=utf-8
 encoding//Widgets/Label.py=utf-8
