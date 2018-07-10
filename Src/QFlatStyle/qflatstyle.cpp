@@ -7,7 +7,13 @@
 #include <qslider.h>
 #endif
 
+#include <QDebug>
+
 using namespace QStyleHelper;
+
+static const char *BackgroundColor     =  "backgroundColor";   // 背景颜色
+static const char *BorderColor         =  "borderColor";       // 边框颜色
+static const char *TextColor           =  "textColor";         // 文字颜色
 
 enum Direction {
     TopDown,
@@ -279,6 +285,51 @@ static void qt_fusion_draw_mdibutton(QPainter *painter, const QStyleOptionTitleB
 QFlatStyle::QFlatStyle() :
     QProxyStyle(QStyleFactory::create("fusion"))
 {
+    setObjectName(QLatin1String("Flat"));
+}
+
+void QFlatStyle::drawPrimitive(PrimitiveElement element,
+                                 const QStyleOption *option,
+                                 QPainter *painter, const QWidget *widget) const
+{
+    Q_ASSERT(option);
+
+    QRect rect = option->rect;
+    int state = option->state;
+
+    QColor outline = this->outline(option->palette);
+    QColor highlightedOutline = this->highlightedOutline(option->palette);
+
+    QColor tabFrameColor = this->tabFrameColor(option->palette);
+
+    switch (element) {
+    case PE_FrameFocusRect:
+        if (const QStyleOptionFocusRect *fropt = qstyleoption_cast<const QStyleOptionFocusRect *>(option)) {
+            //### check for d->alt_down
+            if (!(fropt->state & State_KeyboardFocusChange))
+                return;
+            QRect rect = option->rect;
+
+            painter->save();
+            painter->setRenderHint(QPainter::Antialiasing, true);
+            painter->translate(0.5, 0.5);
+            QColor fillcolor = QColor(255,100,100);highlightedOutline;
+            fillcolor.setAlpha(80);
+            painter->setPen(fillcolor.darker(120));
+            fillcolor.setAlpha(30);
+            QLinearGradient gradient(rect.topLeft(), rect.bottomLeft());
+            gradient.setColorAt(0, fillcolor.lighter(160));
+            gradient.setColorAt(1, fillcolor);
+            painter->setBrush(gradient);
+            painter->fillRect(option->rect, Qt::red);
+            painter->drawRoundedRect(option->rect.adjusted(0, 0, -1, -1), 1, 1);
+            painter->restore();
+        }
+        break;
+    default:
+        baseStyle()->drawPrimitive(element, option, painter, widget);
+        break;
+    }
 }
 
 void QFlatStyle::drawControl(ControlElement element, const QStyleOption *option, QPainter *painter,
@@ -289,6 +340,22 @@ void QFlatStyle::drawControl(ControlElement element, const QStyleOption *option,
     QColor highlightedOutline = this->highlightedOutline(option->palette);
     QColor shadow = this->darkShade();
     switch (element) {
+    case CE_PushButton:
+        if (const QStyleOptionButton *btn = qstyleoption_cast<const QStyleOptionButton *>(option)) {
+            QStyleOptionButton subopt = *btn;
+            // 按钮背景颜色
+            // 获取自定义的属性(文字颜色)
+            QVariant color = widget->property(BackgroundColor);
+            if (color != NULL && !color.isNull() && color.isValid()) {
+                // 修改颜色为自定义的颜色
+                subopt.palette.setBrush(QPalette::Button, color.value<QColor>());
+            }
+
+            proxy()->drawControl(CE_PushButtonBevel, &subopt, painter, widget);
+            subopt.rect = subElementRect(SE_PushButtonContents, btn, widget);
+            proxy()->drawControl(CE_PushButtonLabel, &subopt, painter, widget);
+        }
+        break;
     case CE_PushButtonLabel:
         if (const QStyleOptionButton *button = qstyleoption_cast<const QStyleOptionButton *>(option)) {
             QRect ir = button->rect;
@@ -346,9 +413,9 @@ void QFlatStyle::drawControl(ControlElement element, const QStyleOption *option,
 
             // 画文字
             // 获取自定义的属性(文字颜色)
-            QVariant color = widget->property("textColor");
+            QVariant color = widget->property(TextColor);
             QPalette pal = button->palette;
-            if (color != NULL) {
+            if (color != NULL && !color.isNull() && color.isValid()) {
                 // 修改颜色为自定义的颜色
                 pal.setColor(QPalette::ButtonText, color.value<QColor>());
             }

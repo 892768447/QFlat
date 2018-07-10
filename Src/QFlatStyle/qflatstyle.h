@@ -66,10 +66,13 @@ public:
     QFlatStyle();
     ~QFlatStyle();
 
+    void drawPrimitive(PrimitiveElement element,
+                       const QStyleOption *option,
+                       QPainter *painter, const QWidget *widget = 0) const Q_DECL_OVERRIDE;
     void drawControl(ControlElement element, const QStyleOption *option, QPainter *painter,
-                         const QWidget *widget) const Q_DECL_OVERRIDE;
+                     const QWidget *widget) const Q_DECL_OVERRIDE;
     void drawComplexControl(ComplexControl control, const QStyleOptionComplex *option,
-                                QPainter *painter, const QWidget *widget) const Q_DECL_OVERRIDE;
+                            QPainter *painter, const QWidget *widget) const Q_DECL_OVERRIDE;
 
     // Used for grip handles
     QColor lightShade() const {
@@ -94,7 +97,7 @@ public:
         const QPalette *themePalette = QGuiApplicationPrivate::platformTheme()->palette();
         if (themePalette && themePalette->color(QPalette::Normal, QPalette::Highlight) ==
                 pal.color(QPalette::Normal, QPalette::Highlight) &&
-            themePalette->color(QPalette::Normal, QPalette::HighlightedText) ==
+                themePalette->color(QPalette::Normal, QPalette::HighlightedText) ==
                 pal.color(QPalette::Normal, QPalette::HighlightedText))
             return true;
 #endif

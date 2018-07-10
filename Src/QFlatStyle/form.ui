@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>548</width>
+    <width>595</width>
     <height>663</height>
    </rect>
   </property>
@@ -64,6 +64,13 @@
        <widget class="QPushButton" name="pushButton">
         <property name="text">
          <string>PushButton</string>
+        </property>
+        <property name="borderColor" stdset="0">
+         <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
         </property>
        </widget>
       </item>
@@ -210,8 +217,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>243</width>
-        <height>497</height>
+        <width>236</width>
+        <height>463</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
