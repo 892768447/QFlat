@@ -79,6 +79,7 @@ QString uniqueName(const QString &key, const QStyleOption *option, const QSize &
     return tmp;
 }
 
+/*
 qreal dpiScaled(qreal value)
 {
 #ifdef Q_OS_MAC
@@ -89,6 +90,7 @@ qreal dpiScaled(qreal value)
     return value * scale;
 #endif
 }
+*/
 
 #ifndef QT_NO_ACCESSIBILITY
 bool isInstanceOf(QObject *obj, QAccessible::Role role)

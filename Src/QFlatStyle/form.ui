@@ -50,16 +50,6 @@
    <item row="1" column="0">
     <widget class="QWidget" name="widget" native="true">
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="1" column="0">
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>PushButton</string>
-        </property>
-        <property name="flat">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0">
        <widget class="QPushButton" name="pushButton">
         <property name="text">
@@ -74,20 +64,43 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QPushButton" name="pushButton_2">
+      <item row="1" column="0">
+       <widget class="QPushButton" name="pushButton_3">
         <property name="text">
          <string>PushButton</string>
         </property>
-        <property name="default">
+        <property name="flat">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QToolButton" name="toolButton">
+      <item row="2" column="1">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>60</height>
+         </size>
+        </property>
         <property name="text">
-         <string>...</string>
+         <string>green</string>
+        </property>
+        <property name="backgroundColor" stdset="0">
+         <color>
+          <red>150</red>
+          <green>122</green>
+          <blue>220</blue>
+         </color>
+        </property>
+        <property name="textColor" stdset="0">
+         <color>
+          <red>255</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </property>
+        <property name="borderRadius" stdset="0">
+         <number>10</number>
         </property>
        </widget>
       </item>
@@ -101,37 +114,32 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="pushButton_5">
+      <item row="0" column="1">
+       <widget class="QPushButton" name="pushButton_2">
         <property name="text">
-         <string>green</string>
+         <string>PushButton</string>
         </property>
-        <property name="backgroundColor" stdset="0">
-         <color>
-          <red>170</red>
-          <green>170</green>
-          <blue>255</blue>
-         </color>
-        </property>
-        <property name="textColor" stdset="0">
-         <color>
-          <red>255</red>
-          <green>0</green>
-          <blue>0</blue>
-         </color>
+        <property name="default">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QPushButton" name="pushButton_6">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>60</height>
+         </size>
+        </property>
         <property name="text">
          <string>red</string>
         </property>
         <property name="backgroundColor" stdset="0">
          <color>
-          <red>0</red>
-          <green>255</green>
-          <blue>0</blue>
+          <red>140</red>
+          <green>193</green>
+          <blue>82</blue>
          </color>
         </property>
         <property name="textColor" stdset="0">
@@ -140,6 +148,26 @@
           <green>255</green>
           <blue>255</blue>
          </color>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QPushButton" name="pushButtonMenu">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QToolButton" name="toolButton">
+        <property name="text">
+         <string>...</string>
         </property>
        </widget>
       </item>
@@ -148,6 +176,9 @@
    </item>
    <item row="2" column="0">
     <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
        <string>Tab 1</string>
@@ -160,7 +191,44 @@
         <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="lineEdit_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_3">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="borderColor" stdset="0">
+          <color>
+           <red>150</red>
+           <green>122</green>
+           <blue>220</blue>
+          </color>
+         </property>
+         <property name="borderRadius" stdset="0">
+          <number>10</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QDateTimeEdit" name="dateTimeEdit"/>
@@ -198,6 +266,132 @@
       <attribute name="title">
        <string>Tab 2</string>
       </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
+        <number>20</number>
+       </property>
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>20</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Normal</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>170</red>
+           <green>178</green>
+           <blue>189</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Default</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Primary</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>59</red>
+           <green>175</green>
+           <blue>218</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Success</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>140</red>
+           <green>193</green>
+           <blue>82</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Info</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>55</red>
+           <green>188</green>
+           <blue>155</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Warning</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>246</red>
+           <green>187</green>
+           <blue>66</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>Danger</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="backgroundColor" stdset="0">
+          <color>
+           <red>233</red>
+           <green>87</green>
+           <blue>63</blue>
+          </color>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </item>
@@ -217,8 +411,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>236</width>
-        <height>463</height>
+        <width>266</width>
+        <height>438</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">

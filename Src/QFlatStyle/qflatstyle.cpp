@@ -14,6 +14,7 @@ using namespace QStyleHelper;
 static const char *BackgroundColor     =  "backgroundColor";   // 背景颜色
 static const char *BorderColor         =  "borderColor";       // 边框颜色
 static const char *TextColor           =  "textColor";         // 文字颜色
+static const char *BorderRadius        =  "borderRadius";      // 圆角
 
 enum Direction {
     TopDown,
@@ -167,6 +168,7 @@ static QLinearGradient qt_fusion_gradient(const QRect &rect, const QBrush &baseC
     return gradient;
 }
 
+// 画左上右下方向的小三角形
 static void qt_fusion_draw_arrow(Qt::ArrowType type, QPainter *painter, const QStyleOption *option, const QRect &rect, const QColor &color)
 {
     const int arrowWidth = QStyleHelper::dpiScaled(14);
@@ -289,8 +291,8 @@ QFlatStyle::QFlatStyle() :
 }
 
 void QFlatStyle::drawPrimitive(PrimitiveElement element,
-                                 const QStyleOption *option,
-                                 QPainter *painter, const QWidget *widget) const
+                               const QStyleOption *option,
+                               QPainter *painter, const QWidget *widget) const
 {
     Q_ASSERT(option);
 
@@ -303,28 +305,112 @@ void QFlatStyle::drawPrimitive(PrimitiveElement element,
     QColor tabFrameColor = this->tabFrameColor(option->palette);
 
     switch (element) {
-    case PE_FrameFocusRect:
-        if (const QStyleOptionFocusRect *fropt = qstyleoption_cast<const QStyleOptionFocusRect *>(option)) {
-            //### check for d->alt_down
-            if (!(fropt->state & State_KeyboardFocusChange))
-                return;
-            QRect rect = option->rect;
-
-            painter->save();
-            painter->setRenderHint(QPainter::Antialiasing, true);
-            painter->translate(0.5, 0.5);
-            QColor fillcolor = QColor(255,100,100);highlightedOutline;
-            fillcolor.setAlpha(80);
-            painter->setPen(fillcolor.darker(120));
-            fillcolor.setAlpha(30);
-            QLinearGradient gradient(rect.topLeft(), rect.bottomLeft());
-            gradient.setColorAt(0, fillcolor.lighter(160));
-            gradient.setColorAt(1, fillcolor);
-            painter->setBrush(gradient);
-            painter->fillRect(option->rect, Qt::red);
-            painter->drawRoundedRect(option->rect.adjusted(0, 0, -1, -1), 1, 1);
-            painter->restore();
+    case PE_Frame:
+    {
+        if (widget && widget->inherits("QComboBoxPrivateContainer")){
+            QStyleOption copy = *option;
+            copy.state |= State_Raised;
+            proxy()->drawPrimitive(PE_PanelMenu, &copy, painter, widget);
+            break;
         }
+        painter->save();
+        QPen thePen(outline.lighter(108));
+        thePen.setCosmetic(false);
+        painter->setPen(thePen);
+        painter->drawRect(option->rect.adjusted(0, 0, -1, -1));
+        painter->restore();
+    }
+        qDebug() << widget << "PE_Frame";
+        break;
+    case PE_FrameWindow:
+        painter->save();
+    {
+        QRect rect= option->rect;
+        painter->setPen(QPen(outline.darker(150)));
+        painter->drawRect(option->rect.adjusted(0, 0, -1, -1));
+        painter->setPen(QPen(option->palette.light(), 1));
+        painter->drawLine(QPoint(rect.left() + 1, rect.top() + 1),
+                          QPoint(rect.left() + 1, rect.bottom() - 1));
+        painter->setPen(QPen(option->palette.background().color().darker(120)));
+        painter->drawLine(QPoint(rect.left() + 1, rect.bottom() - 1),
+                          QPoint(rect.right() - 2, rect.bottom() - 1));
+        painter->drawLine(QPoint(rect.right() - 1, rect.top() + 1),
+                          QPoint(rect.right() - 1, rect.bottom() - 1));
+    }
+        painter->restore();
+        qDebug() << widget << "PE_FrameWindow";
+        break;
+    case PE_FrameLineEdit: // 输入框边框
+    {
+        QRect r = rect;
+        bool hasFocus = option->state & State_HasFocus;
+
+        painter->save();
+
+        painter->setRenderHint(QPainter::Antialiasing, true);
+        //  ### highdpi painter bug.
+        painter->translate(0.5, 0.5);
+
+        // 获取自定义的属性(边框颜色)
+        QVariant color = widget->property(BorderColor);
+        if (color != NULL && !color.isNull() && color.isValid()) {
+            // 修改颜色为自定义的颜色
+            outline = color.value<QColor>();
+            highlightedOutline = QColor(outline.red() + 20, outline.green() + 20, outline.blue() + 20);
+        }
+
+        // Draw Outline //画外边框
+        int radius = 4; //默认圆角
+        QVariant pradius = widget->property(BorderRadius);
+        if (pradius != NULL && !pradius.isNull() && pradius.isValid()) {
+            // 自定义的圆角
+            radius = pradius.value<int>();
+        }
+
+        painter->setPen( QPen(hasFocus ? highlightedOutline : outline));
+        painter->setBrush(option->palette.base());
+        painter->drawRoundedRect(r.adjusted(0, 0, -1, -1), radius, radius);
+
+        if (hasFocus) {
+            QColor softHighlight = highlightedOutline;
+            softHighlight.setAlpha(40);
+            painter->setPen(softHighlight);
+            painter->drawRoundedRect(r.adjusted(1, 1, -2, -2), radius - 0.3, radius - 0.3);
+        }
+        // Draw inner shadow //画内阴影
+        painter->setPen(this->topShadow());
+        painter->drawLine(QPoint(r.left() + 2, r.top() + 1), QPoint(r.right() - 2, r.top() + 1));
+
+        painter->restore();
+
+    }
+        break;
+    case PE_IndicatorArrowUp: // 向上三角箭头
+    case PE_IndicatorArrowDown: // 向下三角箭头
+    case PE_IndicatorArrowRight: // 向右三角箭头
+    case PE_IndicatorArrowLeft: // 向左三角箭头
+    {
+        if (option->rect.width() <= 1 || option->rect.height() <= 1)
+            break;
+        // 修改颜色为白色
+        QColor arrowColor = Qt::white;//option->palette.foreground().color();
+        arrowColor.setAlpha(160);
+        Qt::ArrowType arrow = Qt::UpArrow;
+        switch (element) {
+        case PE_IndicatorArrowDown:
+            arrow = Qt::DownArrow;
+            break;
+        case PE_IndicatorArrowRight:
+            arrow = Qt::RightArrow;
+            break;
+        case PE_IndicatorArrowLeft:
+            arrow = Qt::LeftArrow;
+            break;
+        default:
+            break;
+        }
+        qt_fusion_draw_arrow(arrow, painter, option, option->rect, arrowColor);
+    }
         break;
     default:
         baseStyle()->drawPrimitive(element, option, painter, widget);
@@ -344,7 +430,7 @@ void QFlatStyle::drawControl(ControlElement element, const QStyleOption *option,
         if (const QStyleOptionButton *btn = qstyleoption_cast<const QStyleOptionButton *>(option)) {
             QStyleOptionButton subopt = *btn;
             // 按钮背景颜色
-            // 获取自定义的属性(文字颜色)
+            // 获取自定义的属性(背景颜色)
             QVariant color = widget->property(BackgroundColor);
             if (color != NULL && !color.isNull() && color.isValid()) {
                 // 修改颜色为自定义的颜色
