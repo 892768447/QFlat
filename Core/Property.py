@@ -35,7 +35,7 @@ class Property:
     textColorChanged = pyqtSignal(QColor, QColor)  # 文字颜色改变信号
     textColorHoverChanged = pyqtSignal(QColor, QColor)  # 悬停文字颜色改变信号
     borderWidthChanged = pyqtSignal(int, int)  # 边框宽度改变信号
-    borderRadiusChanged = pyqtSignal(int, int)  # 边框圆角改变信号
+    borderRadiusChanged = pyqtSignal(float, float)  # 边框圆角改变信号
 
     def __init__(self, *args, **kwargs):
         super(Property, self).__init__(*args, **kwargs)
@@ -282,7 +282,7 @@ class Property:
         self._borderRadius = 4
         self.update()
 
-    @pyqtProperty(int, freset=resetBorderRadius, notify=borderRadiusChanged)
+    @pyqtProperty(float, freset=resetBorderRadius, notify=borderRadiusChanged)
     def borderRadius(self) -> int:
         """* 获取边框半径::
             print(obj.borderRadius)
