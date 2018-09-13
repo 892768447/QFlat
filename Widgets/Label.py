@@ -31,6 +31,7 @@ class Label(QLabel, Property):
     def paintEvent(self, event):
         """重绘界面"""
         painter = QPainter(self)
+        painter.setRenderHint(QPainter.Antialiasing)
         # 绘制背景颜色
         painter.setBrush(self.backgroundColor)
         # 边框
