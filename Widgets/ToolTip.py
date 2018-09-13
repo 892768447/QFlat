@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月24日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Widgets.ToolTip
+@description: 
+"""
+
 from PyQt5.QtCore import Qt, QPoint
 from PyQt5.QtWidgets import QLabel
 
 
-# Created on 2018年4月24日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Widgets.ToolTip
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""
@@ -36,15 +39,15 @@ class ToolTip(QLabel):
         '''
         if not ToolTip._instance:
             ToolTip._instance = ToolTip()
-        #设置文本内容
+        # 设置文本内容
         ToolTip._instance.setText(text)
-        #得到坐标地址
+        # 得到坐标地址
         pos = widget.mapToGlobal(widget.pos()) - widget.pos()
         if direction == self.Left:
             pass
         elif direction == self.Top:
-            pos = pos + QPoint(int((widget.width() - ToolTip._instance.width()) / 2), 
-                             - ToolTip._instance.height() - 10)
+            pos = pos + QPoint(int((widget.width() - ToolTip._instance.width()) / 2),
+                               - ToolTip._instance.height() - 10)
         elif direction == self.Right:
             pass
         else:

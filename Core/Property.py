@@ -1,17 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月16日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Core.Property
+@description: 属性类
+"""
+
 from PyQt5.QtCore import pyqtSignal, pyqtProperty
 from PyQt5.QtGui import QColor
 
 from Core.Colors import getColor, White, _Color
 
 
-# Created on 2018年4月16日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Core.Property
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""

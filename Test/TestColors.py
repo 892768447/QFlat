@@ -7,7 +7,7 @@ Created on 2018年4月20日
 @site: https://github.com/892768447
 @email: 892768447@qq.com
 @file: Test.TestColors
-@description: 颜色预览
+@description: 测试颜色
 """
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QHBoxLayout,\

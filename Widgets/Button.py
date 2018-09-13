@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月16日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Widgets.Button
+@description: 
+"""
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPainterPath, QPen, QFont, QHelpEvent
 from PyQt5.QtWidgets import QPushButton, QStyleOptionButton, QStyle
@@ -8,12 +17,6 @@ from Core.Property import Property
 from Widgets.ToolTip import ToolTip
 
 
-# Created on 2018年4月16日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Widgets.Button
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""

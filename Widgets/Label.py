@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月23日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Widgets.Label
+@description: 
+"""
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPainter, QPen, QPainterPath, QFont
 from PyQt5.QtWidgets import QLabel
@@ -7,12 +16,6 @@ from PyQt5.QtWidgets import QLabel
 from Core.Property import Property
 
 
-# Created on 2018年4月23日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Widgets.Label
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""

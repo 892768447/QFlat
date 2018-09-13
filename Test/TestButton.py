@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月16日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Test.TestButton
+@description: 测试按钮
+"""
+
 import cgitb
 import sys
 
@@ -11,12 +20,6 @@ from Core import Colors
 from Widgets.Button import Button
 
 
-# Created on 2018年4月16日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Test.TestButton
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""

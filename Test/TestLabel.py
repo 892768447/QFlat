@@ -1,5 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+Created on 2018年4月23日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Test.TestLabel
+@description: 测试Label
+"""
+
 import sys
 
 from PyQt5.QtCore import Qt
@@ -9,12 +18,6 @@ from Core import Colors
 from Widgets.Label import Label
 
 
-# Created on 2018年4月23日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: Test.TestLabel
-# description:
 __Author__ = """By: Irony
 QQ: 892768447
 Email: 892768447@qq.com"""

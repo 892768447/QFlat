@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Created on 2018年4月19日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-#@file: Plugins.Buttonplugin
-#@description:
+"""
+Created on 2018年4月19日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: Plugins.Buttonplugin
+@description: 按钮设计师插件
+"""
 
 from PyQt5.QtCore import Q_ENUMS, pyqtProperty
 from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin

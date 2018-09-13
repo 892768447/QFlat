@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# Created on 2018年3月8日
-# author: Irony
-# site: https://github.com/892768447
-# email: 892768447@qq.com
-# file: designer
-# description: 带插件的设计师
+"""
+Created on 2018年3月8日
+@author: Irony
+@site: https://github.com/892768447
+@email: 892768447@qq.com
+@file: designer
+@description: 带插件的设计师
+"""
 
 
 from distutils.sysconfig import get_python_lib
