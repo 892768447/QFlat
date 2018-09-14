@@ -25,24 +25,24 @@ __Version__ = 1.0
 
 # 样式模版
 StyleTpl = """
-QPushButton {{
-    border: {}px solid {};
-    border-radius: {}px;
-    color: {};
-    background-color: {};
-}}
-QPushButton:hover {{
-    border: {}px solid {};
-    border-radius: {}px;
-    color: {};
-    background-color: {};
-}}
-QPushButton:pressed {{
-    border: {}px solid {};
-    border-radius: {}px;
-    color: {};
-    background-color: {};
-}}
+QPushButton {
+    border: {{}}px solid {{}};
+    border-radius: {{}}px;
+    color: {{}};
+    background-color: {{}};
+}
+QPushButton:hover {
+    border: {{}}px solid {{}};
+    border-radius: {{}}px;
+    color: {{}};
+    background-color: {{}};
+}
+QPushButton:pressed {
+    border: {{}}px solid {{}};
+    border-radius: {{}}px;
+    color: {{}};
+    background-color: {{}};
+}
 """
 
 
