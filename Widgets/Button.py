@@ -23,6 +23,28 @@ Email: 892768447@qq.com"""
 __Copyright__ = 'Copyright (c) 2018 Irony'
 __Version__ = 1.0
 
+# 样式模版
+StyleTpl = """
+QPushButton {{
+    border: {}px solid {};
+    border-radius: {}px;
+    color: {};
+    background-color: {};
+}}
+QPushButton:hover {{
+    border: {}px solid {};
+    border-radius: {}px;
+    color: {};
+    background-color: {};
+}}
+QPushButton:pressed {{
+    border: {}px solid {};
+    border-radius: {}px;
+    color: {};
+    background-color: {};
+}}
+"""
+
 
 class Button(QPushButton, Property):
 
