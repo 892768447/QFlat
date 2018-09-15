@@ -9,8 +9,6 @@ Created on 2018年4月16日
 @file: Core.Colors
 @description: 颜色类
 """
-
-from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
 
 
@@ -21,179 +19,61 @@ __Copyright__ = 'Copyright (c) 2018 Irony'
 __Version__ = 1.0
 
 
-class _Color(QColor):
+class Color(QColor):
 
-    def __init__(self, *args, default=None, lighter=None, **kwargs):
-        try:
-            default, lighter = (default, lighter) if (
-                default and lighter) else self.backgroundColors()
-            super(_Color, self).__init__(default)
-            self.BackgroundColor = self
-            self.BackgroundColorHover = QColor(lighter)
-            self.BorderColor = self
-            self.BorderColorHover = self
+    def __init__(self, *args, hover=None, pressed=None, **kwargs):
+        '''
+        :param hover: 悬停颜色
+        :param pressed: 按下颜色
+        '''
+        super(Color, self).__init__(*args, **kwargs)
+        self.hover = hover or self
+        self.pressed = pressed or self
 
-            defaultT, lighterT = self.textColors()
-            self.TextColor = QColor(defaultT)
-            self.TextColorHover = QColor(lighterT)
-        except Exception as e:
-            print(e)
-            super(_Color, self).__init__(*args, **kwargs)
+    def toRgba(self):
+        """返回rgba格式，如：255, 255, 255, 255"""
+        return '{}, {}, {}, {}'.format(self.red(), self.green(), self.blue(), self.alpha())
 
-    def __getattribute__(self, name):
-        try:
-            return super(_Color, self).__getattribute__(name)
-        except:
-            return QColor()
-
-    @classmethod
-    def backgroundColors(self):
-        return (Qt.white, Qt.white)
-
-    @classmethod
-    def textColors(self):
-        return (Qt.white, Qt.white)
+BlueJeans = Color('#4A89DC', hover=Color('#5D9CEC'))
+Aqua = Color('#3BAFDA', hover=Color('#4FC1E9'))
+Mint = Color('#37BC9B', hover=Color('#48CFAD'))
+Grass = Color('#8CC152', hover=Color('#A0D468'))
+Sunflower = Color('#F6BB42', hover=Color('#FFCE54'))
+Bittersweet = Color('#E9573F', hover=Color('#FC6E51'))
+Grapefruit = Color('#DA4453', hover=Color('#ED5565'))
+Lavender = Color('#967ADC', hover=Color('#AC92EC'))
+PinkRose = Color('#D770AD', hover=Color('#EC87C0'))
+LightGray = Color('#E6E9ED', hover=Color('#F5F7FA'))
+MediumGray = Color('#AAB2BD', hover=Color('#CCD1D9'))
+DarkGray = Color('#434A54', hover=Color('#656D78'))
+White = Color(255, 255, 255, hover=Color('#CCD1D9'), pressed=Color('#CCD1D9'))
+Transparent = Color(255, 255, 255, 0)
 
 
-class BlueJeans(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#4A89DC', '#5D9CEC')
-
-
-class Aqua(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#3BAFDA', '#4FC1E9')
+AllColors = [
+    Transparent, White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet,
+    Grapefruit, Lavender, PinkRose, LightGray, MediumGray, DarkGray
+]
 
 
-class Mint(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#37BC9B', '#48CFAD')
-
-
-class Grass(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#8CC152', '#A0D468')
-
-
-class Sunflower(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#F6BB42', '#FFCE54')
-
-
-class Bittersweet(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#E9573F', '#FC6E51')
-
-
-class Grapefruit(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#DA4453', '#ED5565')
-
-
-class Lavender(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#967ADC', '#AC92EC')
-
-
-class PinkRose(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#D770AD', '#EC87C0')
-
-
-class LightGray(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#E6E9ED', '#F5F7FA')
-
-    @classmethod
-    def textColors(self):
-        return (Qt.black, Qt.black)
-
-
-class MediumGray(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#AAB2BD', '#CCD1D9')
-
-
-class DarkGray(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ('#434A54', '#656D78')
-
-
-class White(_Color):
-
-    @classmethod
-    def backgroundColors(self):
-        return ("#FFFFFF", "#CCD1D9")
-
-    @classmethod
-    def textColors(self):
-        return (Qt.black, Qt.black)
-
-
-class EnumColors:
-    White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
-        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
-        DarkGray = range(13)
-
-
-def getColor(color: [str, int, tuple, list]) -> QColor:
+def getColor(color: [str, int, QColor]) -> QColor:
     """* 根据给定的参数返回颜色::
 
             getColor('red')
             getColor('#ff00ff')
             getColor(QColor())
             getColor(100)
-            getColor((255, 255, 255))
-            getColor([255, 255, 255, 255])
 
-    :param color: str, int, tuple, list
-    :return: QColor
+    :param color: str, int, QColor
+    :return: Color
     """
-    if isinstance(color, _Color):
+    if isinstance(color, Color):
         return color
     if isinstance(color, QColor):
-        return color
-    elif isinstance(color, tuple) or isinstance(color, list):
-        for c in color:
-            if not isinstance(c, int):
-                return White()
-        if len(color) == 3 or len(color) == 4:
-            return QColor(*color)
+        return Color(color)
     elif isinstance(color, int):
-        return QColor(color)
+        return Color(color)
     elif isinstance(color, str):
-        return QColor(color)
+        return Color(color)
     else:
-        return White()
-
-
-def allColors():
-    """第一个为默认颜色"""
-    return [
-        White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet,
-        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, DarkGray
-    ]
+        return White

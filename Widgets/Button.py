@@ -27,22 +27,22 @@ class Button(QPushButton, Property):
     # 样式模版
     StyleTpl = Template("""
     QPushButton {
-        border: {{ borderWidth }}px solid {{ borderColor}};
-        border-radius: {{ borderRadius }}px;
-        color: {{ textColor }};
-        background-color: {{ backgroundColor }};
+        border: {{ _borderWidth }}px solid rgba({{ _borderColor }});
+        border-radius: {{ _borderRadius }}px;
+        color: rgba({{ _textColor }});
+        background-color: rgba({{ _backgroundColor }});
     }
     QPushButton:hover {
-        border: {{ borderWidthHover }}px solid {{ borderColorHover }};
-        border-radius: {{ borderRadiusHover }}px;
-        color: {{ textColorHover }};
-        background-color: {{ backgroundColorHover }};
+        border: {{ _borderWidthHover }}px solid rgba({{ _borderColorHover }});
+        border-radius: {{ _borderRadiusHover }}px;
+        color: rgba({{ _textColorHover }});
+        background-color: rgba({{ _backgroundColorHover }});
     }
     QPushButton:pressed {
-        border: {{ borderWidthPressed }}px solid {{ borderColorPressed }};
-        border-radius: {{ borderRadiusPressed }}px;
-        color: {{ textColorPressed }};
-        background-color: {{ backgroundColorPressed }};
+        border: {{ _borderWidthPressed + 5 }}px solid rgba({{ _borderColorPressed }});
+        border-radius: {{ _borderRadiusPressed }}px;
+        color: rgba({{ _textColorPressed }});
+        background-color: rgba({{ _backgroundColorPressed }});
     }
     """)
 
@@ -50,5 +50,5 @@ class Button(QPushButton, Property):
         super(Button, self).__init__(*args, **kwargs)
 
     def update(self):
-        print(self.generateStyle())
+        self.setStyleSheet(self.generateStyle())
         super(Button, self).update()

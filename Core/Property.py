@@ -9,8 +9,10 @@ Created on 2018年9月11日
 @description: 属性类
 """
 
-from PyQt5.QtCore import pyqtProperty
+from PyQt5.QtCore import pyqtProperty, Qt
+from PyQt5.QtGui import QColor
 
+from Core.Colors import MediumGray, AllColors
 from Core.Template import Template
 
 
@@ -25,21 +27,28 @@ class Property:
 
     def __init__(self, *args, **kwargs):
         super(Property, self).__init__(*args, **kwargs)
-        self._borderWidth = 0                           # 默认 普通状态 边框宽度
-        self._borderWidthHover = 0                      # 默认 悬停状态 边框宽度
-        self._borderWidthPressed = 0                    # 默认 按下状态 边框宽度
-        self._borderColor = 0                           # 默认 普通状态 边框颜色
-        self._borderColorHover = 0                      # 默认 悬停状态 边框颜色
-        self._borderColorPressed = 0                    # 默认 按下状态 边框颜色
-        self._borderRadius = 4                          # 默认 普通状态 圆角半径
-        self._borderRadiusHover = 4                     # 默认 悬停状态 圆角半径
-        self._borderRadiusPressed = 4                   # 默认 按下状态 圆角半径
-        self._textColor = 1                             # 默认 普通状态 文字颜色
-        self._textColorHover = 1                        # 默认 悬停状态 文字颜色
-        self._textColorPressed = 1                      # 默认 按下状态 文字颜色
-        self._backgroundColor = 1                             # 默认 普通状态 文字颜色
-        self._backgroundColorHover = 1                        # 默认 悬停状态 文字颜色
-        self._backgroundColorPressed = 1                      # 默认 按下状态 文字颜色
+        self._borderWidth = 0                                 # 默认 普通状态 边框宽度
+        self._borderWidthHover = 0                            # 默认 悬停状态 边框宽度
+        self._borderWidthPressed = 0                          # 默认 按下状态 边框宽度
+        self._borderColor = QColor(Qt.transparent)            # 默认 普通状态 边框颜色
+        self._borderColorHover = QColor(Qt.transparent)       # 默认 悬停状态 边框颜色
+        self._borderColorPressed = QColor(Qt.transparent)     # 默认 按下状态 边框颜色
+        self._borderRadius = 4                                # 默认 普通状态 圆角半径
+        self._borderRadiusHover = 4                           # 默认 悬停状态 圆角半径
+        self._borderRadiusPressed = 4                         # 默认 按下状态 圆角半径
+        self._textColor = QColor(Qt.black)                    # 默认 普通状态 文字颜色
+        self._textColorHover = QColor(Qt.white)               # 默认 悬停状态 文字颜色
+        self._textColorPressed = QColor(Qt.white)             # 默认 按下状态 文字颜色
+        self._backgroundColor = QColor(Qt.white)              # 默认 普通状态 文字颜色
+        # 默认 悬停状态 文字颜色
+        self._backgroundColorHover = QColor(Qt.white)
+        # 默认 按下状态 文字颜色
+        self._backgroundColorPressed = QColor(Qt.white)
+        self._resetColorTheme()
+
+    def _resetColorTheme(self):
+        self._colorTheme = AllColors.index(MediumGray)
+        self.update()
 
     def resetBorderWidth(self):
         """重置普通状态下边框宽度"""
@@ -57,18 +66,46 @@ class Property:
         self._borderWidth = borderWidth
         self.update()
 
+    def resetBorderColor(self):
+        """重置普通状态下边框颜色"""
+        self._borderColor = QColor(Qt.transparent)
+        self.update()
+
+    @pyqtProperty(QColor, freset=resetBorderColor)
+    def borderColor(self) -> QColor:
+        """获取普通状态下边框颜色"""
+        return self._borderColor
+
+    @borderColor.setter
+    def borderColor(self, borderColor: QColor):
+        """设置普通状态下边框颜色"""
+        self._borderColor = borderColor
+        self.update()
+
     @property
     def _properties(self):
         return {
-            'borderWidth': self._borderWidth,
-            'borderWidthHover': self._borderWidthHover,
-            'borderWidthPressed': self._borderWidthPressed,
+            '_borderWidth': self._borderWidth,
+            '_borderWidthHover': self._borderWidthHover,
+            '_borderWidthPressed': self._borderWidthPressed,
+            '_borderColor': self._borderColor,
+            '_borderColorHover': self._borderColorHover,
+            '_borderColorPressed': self._borderColorPressed,
+            '_borderRadius': self._borderRadius,
+            '_borderRadiusHover': self._borderRadiusHover,
+            '_borderRadiusPressed': self._borderRadiusPressed,
+            '_textColor': self._textColor,
+            '_textColorHover': self._textColorHover,
+            '_textColorPressed': self._textColorPressed,
+            '_backgroundColor': self._backgroundColor,
+            '_backgroundColorHover': self._backgroundColorHover,
+            '_backgroundColorPressed': self._backgroundColorPressed,
         }
 
     def generateStyle(self):
         if not hasattr(self, 'StyleTpl') or not hasattr(self.StyleTpl, 'generate'):
             return self.styleSheet()
-        return self.StyleTpl.generate(**self._properties)
+        return self.StyleTpl.generate(**self._properties).decode()
 
 
 if __name__ == '__main__':
