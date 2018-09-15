@@ -58,7 +58,9 @@ class Property:
             'borderWidthPressed': self._borderWidthPressed,
         }
 
-    def styleSheet(self):
+    def generateStyle(self):
+        if not hasattr(self, 'StyleTpl') or not hasattr(self.StyleTpl, 'generate'):
+            return self.styleSheet()
         return self.StyleTpl.generate(**self._properties)
 
 
