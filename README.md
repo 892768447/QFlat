@@ -1,18 +1,10 @@
-# QFlat UI
+# QFlat UI(Rewriting)
 
 Simple Flat Design By PyQt5, Like: http://bootflat.github.io/documentation.html
 
 ## New
  - Rewrite UI Components
  - Providing Qt Designer Plugins
-
-## Qt Designer
- - for china: pip install -i https://pypi.doubanio.com/simple/ PyQt5 PyQt5Designer
- - git clone https://github.com/892768447/QFlat.git
- - cd QFlat
- - python designer.py (This will include QFlat plugin)
- - designer ScreenShot like this:
-
 
 
 ## QQ Group
