@@ -50,5 +50,5 @@ class Button(QPushButton, Property):
         super(Button, self).__init__(*args, **kwargs)
 
     def update(self):
-        print(self.styleSheet())
+        print(self.generateStyle())
         super(Button, self).update()

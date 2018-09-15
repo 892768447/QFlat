@@ -154,6 +154,12 @@ class White(_Color):
         return (Qt.black, Qt.black)
 
 
+class EnumColors:
+    White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
+        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
+        DarkGray = range(13)
+
+
 def getColor(color: [str, int, tuple, list]) -> QColor:
     """* 根据给定的参数返回颜色::
 

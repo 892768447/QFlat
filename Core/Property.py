@@ -23,16 +23,23 @@ __Version__ = 1.0
 
 class Property:
 
-    White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet, \
-        Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
-        DarkGray = range(13)
-
     def __init__(self, *args, **kwargs):
         super(Property, self).__init__(*args, **kwargs)
-        self._borderWidth = 0                           # 默认普通状态边框宽度
-        self._borderWidthHover = 0                      # 默认悬停状态边框宽度
-        self._borderWidthPressed = 0                    # 默认按下状态边框宽度
-        self._borderRadius = 4                          # 默认圆角半径
+        self._borderWidth = 0                           # 默认 普通状态 边框宽度
+        self._borderWidthHover = 0                      # 默认 悬停状态 边框宽度
+        self._borderWidthPressed = 0                    # 默认 按下状态 边框宽度
+        self._borderColor = 0                           # 默认 普通状态 边框颜色
+        self._borderColorHover = 0                      # 默认 悬停状态 边框颜色
+        self._borderColorPressed = 0                    # 默认 按下状态 边框颜色
+        self._borderRadius = 4                          # 默认 普通状态 圆角半径
+        self._borderRadiusHover = 4                     # 默认 悬停状态 圆角半径
+        self._borderRadiusPressed = 4                   # 默认 按下状态 圆角半径
+        self._textColor = 1                             # 默认 普通状态 文字颜色
+        self._textColorHover = 1                        # 默认 悬停状态 文字颜色
+        self._textColorPressed = 1                      # 默认 按下状态 文字颜色
+        self._backgroundColor = 1                             # 默认 普通状态 文字颜色
+        self._backgroundColorHover = 1                        # 默认 悬停状态 文字颜色
+        self._backgroundColorPressed = 1                      # 默认 按下状态 文字颜色
 
     def resetBorderWidth(self):
         """重置普通状态下边框宽度"""
