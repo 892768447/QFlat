@@ -14,7 +14,7 @@ from PyQt5.QtGui import QPainter, QPainterPath, QPen, QFont, QHelpEvent
 from PyQt5.QtWidgets import QPushButton, QStyleOptionButton, QStyle
 
 from Core.Property import Property
-from Widgets.ToolTip import ToolTip
+from Core.Template import Template
 
 
 __Author__ = """By: Irony
@@ -24,7 +24,7 @@ __Copyright__ = 'Copyright (c) 2018 Irony'
 __Version__ = 1.0
 
 # 样式模版
-StyleTpl = """
+StyleTpl = Template("""
 QPushButton {
     border: {{}}px solid {{}};
     border-radius: {{}}px;
@@ -43,7 +43,7 @@ QPushButton:pressed {
     color: {{}};
     background-color: {{}};
 }
-"""
+""")
 
 
 class Button(QPushButton, Property):
@@ -62,7 +62,7 @@ class Button(QPushButton, Property):
         super(Button, self).enterEvent(event)
         if not self.toolTip():
             return
-        ToolTip.showText(self, self.toolTip())
+#         ToolTip.showText(self, self.toolTip())
 
     def leaveEvent(self, event):
         """鼠标离开事件"""

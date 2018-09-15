@@ -11,6 +11,8 @@ Created on 2018年9月11日
 
 from PyQt5.QtCore import pyqtProperty
 
+from Core.Template import Template
+
 
 __Author__ = """By: Irony
 QQ: 892768447
@@ -47,3 +49,19 @@ class Property:
         """设置普通状态下边框宽度"""
         self._borderWidth = borderWidth
         self.update()
+
+    @property
+    def _properties(self):
+        return {
+            'borderWidth': self._borderWidth,
+            'borderWidthHover': self._borderWidthHover,
+            'borderWidthPressed': self._borderWidthPressed,
+        }
+
+    def styleSheet(self):
+        return self.StyleTpl.generate(**self._properties)
+
+
+if __name__ == '__main__':
+    print(Template('border: {{ borderWidth }}px solid {{ borderColor }};'
+                   ).generate(borderWidth=2, borderColor='red').decode())
