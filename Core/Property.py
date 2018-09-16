@@ -14,8 +14,7 @@ from PyQt5.QtGui import QColor
 
 from Core.Colors import MediumGray, Transparent, White
 from Core.Template import Template
-from Core.Themes import AllThemes, EnumThemes
-from PyQt5.QtWidgets import QMessageBox
+from Core.Themes import EnumThemes
 
 
 __Author__ = """By: Irony
@@ -44,7 +43,7 @@ class Property:
         self._backgroundColor = MediumGray                    # 默认 普通状态 文字颜色
         self._backgroundColorHover = MediumGray.hover         # 默认 悬停状态 文字颜色
         self._backgroundColorPressed = MediumGray.pressed     # 默认 按下状态 文字颜色
-        self._colorTheme = EnumThemes.default
+        self._colorTheme = EnumThemes.MediumGray
         self._resetColorTheme()
 
     def _resetColorTheme(self):

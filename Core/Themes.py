@@ -18,6 +18,8 @@ __Version__ = 1.0
 
 class ThemeTransparent:
 
+    color = Colors.Transparent
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -26,6 +28,8 @@ class ThemeTransparent:
 
 
 class ThemeWhite:
+
+    color = Colors.White
 
     def __init__(self, obj):
         self.obj = obj
@@ -36,6 +40,8 @@ class ThemeWhite:
 
 class ThemeBlueJeans:
 
+    color = Colors.BlueJeans
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -44,6 +50,8 @@ class ThemeBlueJeans:
 
 
 class ThemeAqua:
+
+    color = Colors.Aqua
 
     def __init__(self, obj):
         self.obj = obj
@@ -54,6 +62,8 @@ class ThemeAqua:
 
 class ThemeMint:
 
+    color = Colors.Mint
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -62,6 +72,8 @@ class ThemeMint:
 
 
 class ThemeGrass:
+
+    color = Colors.Grass
 
     def __init__(self, obj):
         self.obj = obj
@@ -72,6 +84,8 @@ class ThemeGrass:
 
 class ThemeSunflower:
 
+    color = Colors.Sunflower
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -80,6 +94,8 @@ class ThemeSunflower:
 
 
 class ThemeBittersweet:
+
+    color = Colors.Bittersweet
 
     def __init__(self, obj):
         self.obj = obj
@@ -90,6 +106,8 @@ class ThemeBittersweet:
 
 class ThemeGrapefruit:
 
+    color = Colors.Grapefruit
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -98,6 +116,8 @@ class ThemeGrapefruit:
 
 
 class ThemeLavender:
+
+    color = Colors.Lavender
 
     def __init__(self, obj):
         self.obj = obj
@@ -108,6 +128,8 @@ class ThemeLavender:
 
 class ThemePinkRose:
 
+    color = Colors.PinkRose
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -116,6 +138,8 @@ class ThemePinkRose:
 
 
 class ThemeLightGray:
+
+    color = Colors.LightGray
 
     def __init__(self, obj):
         self.obj = obj
@@ -126,6 +150,8 @@ class ThemeLightGray:
 
 class ThemeMediumGray:
 
+    color = Colors.MediumGray
+
     def __init__(self, obj):
         self.obj = obj
 
@@ -134,6 +160,8 @@ class ThemeMediumGray:
 
 
 class ThemeDarkGray:
+
+    color = Colors.DarkGray
 
     def __init__(self, obj):
         self.obj = obj
@@ -144,9 +172,9 @@ class ThemeDarkGray:
 
 class Int(int):
 
-    def __new__(self, value, color):
+    def __new__(self, value, theme):
         obj = int.__new__(self, value)
-        obj.color = color
+        obj.theme = theme
         return obj
 
     def __repr__(self):
@@ -154,24 +182,20 @@ class Int(int):
 
 
 class EnumThemes:
-    Transparent = Int(0,Colors.Transparent)
-    White = 1
-    BlueJeans = 2
-    Aqua = 3
-    Mint = 4
-    Grass = 5
-    Sunflower = 6
-    Bittersweet = 7
-    Grapefruit = 8
-    Lavender = 9
-    PinkRose = 10
-    LightGray = 11
-    MediumGray = 12
-    DarkGray = 13
-
-    @classmethod
-    def default(cls):
-        return cls.MediumGray
+    Transparent = Int(0, ThemeTransparent)
+    White = Int(1, ThemeWhite)
+    BlueJeans = Int(2, ThemeBlueJeans)
+    Aqua = Int(3, ThemeAqua)
+    Mint = Int(4, ThemeMint)
+    Grass = Int(5, ThemeGrass)
+    Sunflower = Int(6, ThemeSunflower)
+    Bittersweet = Int(7, ThemeBittersweet)
+    Grapefruit = Int(8, ThemeGrapefruit)
+    Lavender = Int(9, ThemeLavender)
+    PinkRose = Int(10, ThemePinkRose)
+    LightGray = Int(1, ThemeLightGray)
+    MediumGray = Int(12, ThemeMediumGray)
+    DarkGray = Int(13, ThemeDarkGray)
 
 AllThemes = [
     ThemeTransparent, ThemeWhite, ThemeBlueJeans, ThemeAqua, ThemeMint,
