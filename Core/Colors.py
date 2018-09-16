@@ -34,6 +34,7 @@ class Color(QColor):
         """返回rgba格式，如：255, 255, 255, 255"""
         return '{}, {}, {}, {}'.format(self.red(), self.green(), self.blue(), self.alpha())
 
+
 BlueJeans = Color('#4A89DC', hover=Color('#5D9CEC'))
 Aqua = Color('#3BAFDA', hover=Color('#4FC1E9'))
 Mint = Color('#37BC9B', hover=Color('#48CFAD'))
@@ -47,6 +48,7 @@ LightGray = Color('#E6E9ED', hover=Color('#F5F7FA'))
 MediumGray = Color('#AAB2BD', hover=Color('#CCD1D9'))
 DarkGray = Color('#434A54', hover=Color('#656D78'))
 White = Color(255, 255, 255, hover=Color('#CCD1D9'), pressed=Color('#CCD1D9'))
+Black = Color(0, 0, 0)
 Transparent = Color(255, 255, 255, 0)
 
 

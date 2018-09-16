@@ -11,11 +11,14 @@ Created on 2018年9月15日
 """
 
 from PyQt5.QtCore import Q_ENUMS, pyqtProperty
-from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin
+from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin,\
+    QPyDesignerPropertySheetExtension, QDesignerFormWindowInterface
 from PyQt5.QtGui import QPixmap, QIcon
+import sip
 
 from Core.Themes import EnumThemes
 from Widgets.Button import Button as _Button
+from PyQt5.QtWidgets import QMessageBox
 
 
 __Author__ = 'By: Irony\nQQ: 892768447\nEmail: 892768447@qq.com'
@@ -43,11 +46,18 @@ class Button(_Button):
         self._resetColorTheme()
 
 
+Q_TYPEID = {
+    'QDesignerContainerExtension': 'org.qt-project.Qt.Designer.Container',
+    'QDesignerPropertySheetExtension': 'org.qt-project.Qt.Designer.PropertySheet'
+}
+
+
 class ButtonPlugin(QPyDesignerCustomWidgetPlugin):
 
     def __init__(self, *args, **kwargs):
         super(ButtonPlugin, self).__init__(*args, **kwargs)
         self.initialized = False
+        QPyDesignerPropertySheetExtension
 
     def initialize(self, core):
         if self.initialized:
@@ -68,6 +78,7 @@ class ButtonPlugin(QPyDesignerCustomWidgetPlugin):
 
     def createWidget(self, parent):
         button = Button('Button', parent=parent)
+        button.styleSheetChanged.connect(self.styleSheetChanged)
         return button
 
     def name(self):
@@ -85,6 +96,26 @@ class ButtonPlugin(QPyDesignerCustomWidgetPlugin):
     def domXml(self):
         return '<widget class="{0}" name="{0}">\n' \
                '</widget>\n'.format(self.name())
+
+    def styleSheetChanged(self):
+        widget = self.sender()
+        QMessageBox.information(None, '', str(widget))
+        form = QDesignerFormWindowInterface.findFormWindow(widget)
+        QMessageBox.information(None, '', str(form))
+        if form:
+            sheet = form.core().extensionManager().extension(
+                widget, Q_TYPEID['QDesignerPropertySheetExtension'])
+            sheet = sip.cast(sheet, QPyDesignerPropertySheetExtension)
+            QMessageBox.information(None, '', str(sheet))
+            index = sheet.indexOf('styleSheet')
+            QMessageBox.information(None, '', str(index))
+            sheet.setChanged(index, True)
+
+    def borderRadiusChanged(self):
+        pass
+
+    def colorThemeChanged(self):
+        pass
 
 
 # Define the image used for the icon.

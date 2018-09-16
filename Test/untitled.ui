@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="Button" name="Button">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>60</y>
+     <width>90</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>/*QFlat Button Style*/
+QPushButton {
+    width: 90px;
+    height: 30px;
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 255);
+    background-color: rgba(150, 122, 220, 255);
+}
+QPushButton:hover {
+    border: 0px solid rgba(255, 255, 255, 0);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 255);
+    background-color: rgba(172, 146, 236, 255);
+}
+QPushButton:pressed {
+    border: 5px solid rgba(150, 122, 220, 255);
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 255);
+    background-color: rgba(150, 122, 220, 255);
+}
+    </string>
+   </property>
+   <property name="colorTheme" stdset="0">
+    <enum>Button::Lavender</enum>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>QFlat.Widgets.Button</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
