@@ -47,7 +47,6 @@ class Button(_Button):
 
 
 Q_TYPEID = {
-    'QDesignerContainerExtension': 'org.qt-project.Qt.Designer.Container',
     'QDesignerPropertySheetExtension': 'org.qt-project.Qt.Designer.PropertySheet'
 }
 
@@ -99,16 +98,12 @@ class ButtonPlugin(QPyDesignerCustomWidgetPlugin):
 
     def styleSheetChanged(self):
         widget = self.sender()
-        QMessageBox.information(None, '', str(widget))
         form = QDesignerFormWindowInterface.findFormWindow(widget)
-        QMessageBox.information(None, '', str(form))
         if form:
             sheet = form.core().extensionManager().extension(
                 widget, Q_TYPEID['QDesignerPropertySheetExtension'])
             sheet = sip.cast(sheet, QPyDesignerPropertySheetExtension)
-            QMessageBox.information(None, '', str(sheet))
             index = sheet.indexOf('styleSheet')
-            QMessageBox.information(None, '', str(index))
             sheet.setChanged(index, True)
 
     def borderRadiusChanged(self):
