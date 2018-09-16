@@ -12,7 +12,7 @@ Created on 2018年9月11日
 from PyQt5.QtCore import pyqtProperty, Qt
 from PyQt5.QtGui import QColor
 
-from Core.Colors import MediumGray, AllColors
+from Core.Colors import MediumGray, AllColors, Transparent, White
 from Core.Template import Template
 
 
@@ -29,21 +29,19 @@ class Property:
         super(Property, self).__init__(*args, **kwargs)
         self._borderWidth = 0                                 # 默认 普通状态 边框宽度
         self._borderWidthHover = 0                            # 默认 悬停状态 边框宽度
-        self._borderWidthPressed = 0                          # 默认 按下状态 边框宽度
-        self._borderColor = QColor(Qt.transparent)            # 默认 普通状态 边框颜色
-        self._borderColorHover = QColor(Qt.transparent)       # 默认 悬停状态 边框颜色
-        self._borderColorPressed = QColor(Qt.transparent)     # 默认 按下状态 边框颜色
+        self._borderWidthPressed = 5                          # 默认 按下状态 边框宽度
+        self._borderColor = Transparent                       # 默认 普通状态 边框颜色
+        self._borderColorHover = Transparent                  # 默认 悬停状态 边框颜色
+        self._borderColorPressed = MediumGray.pressed         # 默认 按下状态 边框颜色
         self._borderRadius = 4                                # 默认 普通状态 圆角半径
         self._borderRadiusHover = 4                           # 默认 悬停状态 圆角半径
         self._borderRadiusPressed = 4                         # 默认 按下状态 圆角半径
-        self._textColor = QColor(Qt.black)                    # 默认 普通状态 文字颜色
-        self._textColorHover = QColor(Qt.white)               # 默认 悬停状态 文字颜色
-        self._textColorPressed = QColor(Qt.white)             # 默认 按下状态 文字颜色
-        self._backgroundColor = QColor(Qt.white)              # 默认 普通状态 文字颜色
-        # 默认 悬停状态 文字颜色
-        self._backgroundColorHover = QColor(Qt.white)
-        # 默认 按下状态 文字颜色
-        self._backgroundColorPressed = QColor(Qt.white)
+        self._textColor = White                               # 默认 普通状态 文字颜色
+        self._textColorHover = White.hover                    # 默认 悬停状态 文字颜色
+        self._textColorPressed = White.pressed                # 默认 按下状态 文字颜色
+        self._backgroundColor = MediumGray                    # 默认 普通状态 文字颜色
+        self._backgroundColorHover = MediumGray.hover         # 默认 悬停状态 文字颜色
+        self._backgroundColorPressed = MediumGray.pressed     # 默认 按下状态 文字颜色
         self._resetColorTheme()
 
     def _resetColorTheme(self):
