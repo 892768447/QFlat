@@ -50,23 +50,8 @@ White = Color(255, 255, 255, hover=Color('#CCD1D9'), pressed=Color('#CCD1D9'))
 Transparent = Color(255, 255, 255, 0)
 
 
-AllColors = [
-    Transparent, White, BlueJeans, Aqua, Mint, Grass, Sunflower, Bittersweet,
-    Grapefruit, Lavender, PinkRose, LightGray, MediumGray, DarkGray
-]
-
-
 def getColor(color: [str, int, QColor]) -> QColor:
-    """* 根据给定的参数返回颜色::
-
-            getColor('red')
-            getColor('#ff00ff')
-            getColor(QColor())
-            getColor(100)
-
-    :param color: str, int, QColor
-    :return: Color
-    """
+    """根据给定的参数返回颜色"""
     if isinstance(color, Color):
         return color
     if isinstance(color, QColor):

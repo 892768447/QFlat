@@ -13,7 +13,7 @@ Created on 2018年9月15日
 from PyQt5.QtCore import Q_ENUMS, pyqtProperty
 from PyQt5.QtDesigner import QPyDesignerCustomWidgetPlugin
 from PyQt5.QtGui import QPixmap, QIcon
-
+from Core.Themes import EnumThemes
 from Widgets.Button import Button as _Button
 
 
@@ -25,18 +25,14 @@ __Version__ = 1.0
 class Button(_Button):
     """设计师里需要枚举,必须在QObject的对象里定义,所以这里重新继承下"""
 
-    class EnumColors:
-        Transparent, White, BlueJeans, Aqua, Mint, Grass, Sunflower, \
-            Bittersweet, Grapefruit, Lavender, PinkRose, LightGray, MediumGray, \
-            DarkGray = range(14)
-    Q_ENUMS(EnumColors)
+    Q_ENUMS(EnumThemes)
 
     def resetColorTheme(self):
         """重置主题"""
-        self._colorTheme = self.EnumColors.MediumGray
+        self._colorTheme = EnumThemes.MediumGray
         self._resetColorTheme()
 
-    @pyqtProperty(EnumColors, freset=resetColorTheme)
+    @pyqtProperty(EnumThemes, freset=resetColorTheme)
     def colorTheme(self):
         return self._colorTheme
 
